@@ -1,0 +1,11 @@
+.vscode/
+.idea/
+.vim/
+.DS_Store
+
+__pycache__
+
+.env
+*venv/
+*.db
+*.xls*
