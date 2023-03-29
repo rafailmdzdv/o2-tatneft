@@ -1,0 +1,8 @@
+[flake8]
+extend-ignore = F401, W292, E501
+exclude = 
+    .git,
+    .github,
+    __pycache__,
+    migrations,
+    settings.py
