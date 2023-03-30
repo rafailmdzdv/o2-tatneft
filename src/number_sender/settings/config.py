@@ -1,0 +1,4 @@
+API_URL_PREFIX = 'http://127.0.0.1:8000/api/fuelcards'
+
+MINUTES = 7
+MINUTES_IN_SECONDS = MINUTES * 60

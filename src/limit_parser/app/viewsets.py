@@ -22,5 +22,5 @@ class FuelCardViewSet(ModelViewSet):
     @action(detail=False,
             methods=['put'],
             url_path=r'send_card/(?P<number>\d*)')
-    def send_card(self, _: Request, number: int = None):
-        pass
+    def send_card(self, _: Request, number: str):
+        return Response({'status': f'{number} successfull'})
