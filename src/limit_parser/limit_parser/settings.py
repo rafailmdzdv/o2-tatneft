@@ -60,6 +60,11 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer'
+    ]
+}
 
 WSGI_APPLICATION = 'limit_parser.wsgi.application'
 
