@@ -4,7 +4,7 @@ import httpx
 
 from models.card import Card
 from settings import config
-from settings.log import logger as log
+from project_config.log import logger as log
 
 
 def main():
