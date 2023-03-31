@@ -4,7 +4,7 @@ import httpx
 
 from models.card import Card
 from settings import config
-from settings.log import logger as log
+from project_config.log import logger as log
 
 
 def main():
@@ -37,7 +37,8 @@ def _try_send_card_number(card: Card) -> None:
 
 
 def _send_card_number(card: Card) -> dict:
-    response = httpx.put(f'{config.API_URL_PREFIX}/send_card/{card.number}/')
+    response = httpx.put(f'{config.API_URL_PREFIX}/send_card/{card.number}/',
+                         timeout=None)
     return response.json()
 
 

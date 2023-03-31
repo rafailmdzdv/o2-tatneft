@@ -2,7 +2,7 @@ import logging
 import pathlib
 
 
-LOGFILE_PATH = pathlib.Path(__file__).resolve().parent.parent
+LOGFILE_PATH = pathlib.Path(__file__).resolve().parent
 
 
 def get_logger() -> logging.Logger:
