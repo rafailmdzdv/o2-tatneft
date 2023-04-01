@@ -6,6 +6,7 @@ from playwright.sync_api import (Browser,
                                  sync_playwright)
 
 from app import models
+from project_config.envs import env
 from project_config.log import logger as log
 
 
@@ -28,8 +29,8 @@ def _start_adding_limit(card_number: str) -> None:
 
 def _authorize_to_lk(browser: Browser) -> Page:
     signin_page = _open_signin_page(browser)
-    signin_page.wait_for_selector('#slqusername').fill('demo')
-    signin_page.wait_for_selector('#slqpassword').fill('demo')
+    signin_page.wait_for_selector('#slqusername').fill(env.LK_TATNEFT_LOGIN)
+    signin_page.wait_for_selector('#slqpassword').fill(env.LK_TATNEFT_PASSWORD)
     signin_page.wait_for_selector('[type="submit"]').click()
     return signin_page
 
@@ -74,6 +75,7 @@ def _divide_card_number(card_number: str) -> str:
 def _add_limit(card_page: Page) -> None:
     card_page.wait_for_selector('text=Добавить лимит').click()
     limit_form = card_page.wait_for_selector('mat-dialog-container')
+    card_page.wait_for_timeout(500)
 
     _select_category(limit_form, card_page)  # type: ignore
     _select_group(limit_form, card_page)  # type: ignore
