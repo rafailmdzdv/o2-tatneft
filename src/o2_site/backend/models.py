@@ -24,7 +24,7 @@ class Region(models.Model):
 class GasStation(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
-    issuer_number = models.IntegerField()
+    issuer_number = models.IntegerField(null=True)
     gs_number = models.IntegerField()
     companion_service_objects = models.TextField(null=True)
     additional_services = models.TextField(null=True)
@@ -36,6 +36,7 @@ class FuelPrices(models.Model):
     ai92_taneko = models.FloatField(null=True)
     ai92 = models.FloatField(null=True)
     ai95_taneko = models.FloatField(null=True)
+    ai95 = models.FloatField(null=True)
     dt = models.FloatField(null=True)
     dt_taneko = models.FloatField(null=True)
     ai98_taneko = models.FloatField(null=True)
