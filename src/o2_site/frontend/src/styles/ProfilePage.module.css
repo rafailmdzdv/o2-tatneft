@@ -1,0 +1,49 @@
+.profile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.profilePanel {
+    display: inline-flex;
+    flex-flow: column;
+    height: 90vh;;
+    background: #00b473;
+}
+
+.profilePanel a {
+    text-decoration: none;
+    font: normal bold 1.5vw sans-serif;
+    color: #000;
+    margin: 10% 10%;
+}
+
+.changeForm {
+    align-self: baseline;
+}
+
+.changeForm form {
+    margin-top: 10%;
+}
+
+.submitButton {
+    font-size: 1.5vw;
+    text-align: right;
+    margin: auto auto;
+}
+
+.newUsernameInput {
+    font-size: 1.5vw;
+    text-align: right;
+    margin: auto auto;
+}
+
+.newUsernameInput input {
+    width: 20vw;
+    height: 2vh;
+    margin-left: 2%;
+}
+
+.statusMessage {
+    text-align: center;
+}

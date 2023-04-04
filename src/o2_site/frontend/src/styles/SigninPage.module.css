@@ -1,0 +1,46 @@
+.signinForm {
+    display: flex;
+    font: normal bold 2vw sans-serif;
+    border: 5px solid #ee3a43;
+    background-color: #00b473;
+    justify-content: center;
+    align-items: center;
+    margin: auto auto;
+    width: 70vw;
+    height: 50vh;
+    border-radius: 15px;
+}
+
+.signinForm form {
+    height: auto;
+}
+
+.inputFields {
+    height: auto;
+    margin-bottom: auto;
+    text-align: center;
+}
+
+.inputFields input {
+    margin: auto auto;
+    width: 20vw;
+    height: 3vh;
+    display: block;
+}
+
+.submitButton{
+    width: auto;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.submitButton button {
+    font-size: 1.5vw;
+    border: 2px solid #ee3a43;
+    border-radius: 10px;
+}
+
+.statusCode {
+    text-align: center;
+    margin-top: 1vh;
+}

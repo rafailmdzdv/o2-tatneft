@@ -1,0 +1,8 @@
+.mapClass {
+    border: 10px solid #ee3a43;
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 50vw;
+}

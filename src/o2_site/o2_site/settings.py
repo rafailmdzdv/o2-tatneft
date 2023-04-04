@@ -9,29 +9,44 @@ SECRET_KEY = env.THIRD_SECRET_TOKEN
 
 DEBUG = True
 
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1']
+
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ]
+}
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'backend'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'o2_site.urls'
 
@@ -99,3 +114,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 XLS_LINK = 'https://rss.tatneft.ru/outer/azs/get_xml_list'
 XLS_FILENAME = 'rss_gs.xls'
 XLS_FILEPATH = f'{BASE_DIR}/{XLS_FILENAME}'
+
+NCH_COORDINATES = (55.741215, 52.404099)
