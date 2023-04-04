@@ -14,14 +14,6 @@ from o2_site import settings
 from project_config.log import logger as log
 
 
-FUEL_TYPE_LIST = [
-    'АИ-92 Танеко', 'АИ-92', 'АИ-95 Танеко', 'АИ-95',
-    'АИ-98 Танеко', 'АИ-98', 'ДТ', 'ДТ ТАНЕКО', 'СУГ',
-    'Электрозарядка', 'АИ-100', 'AdBlue', 'АИ-80',
-    'КПГ', 'ДТ (зимнее)', 'ДТ Арктика'
-]
-
-
 def start_monthly_parsing():
     schedule.every(30).days.do(_get_gs_data)
     log.debug('Monthly work started!')
@@ -79,43 +71,43 @@ def _add_or_update_fuel_prices(gas_station: models.GasStation,
                                row: pd.Series) -> None:
     fuels = {name: price.to_float(fuel_price)
              for name, fuel_price in row.items()
-             if name in FUEL_TYPE_LIST}
+             if name in list(price.FuelTypes)}
     fuel, created = models.FuelPrices.objects.get_or_create(
         gas_station=gas_station,
         defaults={
-            'ai92_taneko': fuels['АИ-92 Танеко'],
-            'ai92': fuels['АИ-92'],
-            'ai95_taneko': fuels['АИ-95 Танеко'],
-            'ai95': fuels['АИ-95'],
-            'dt': fuels['ДТ'],
-            'dt_taneko': fuels['ДТ ТАНЕКО'],
-            'ai98_taneko': fuels['АИ-98 Танеко'],
-            'sug': fuels['СУГ'],
-            'ai98': fuels['АИ-98'],
-            'electro': fuels['Электрозарядка'],
-            'ai100': fuels['АИ-100'],
-            'ad_blue': fuels['AdBlue'],
-            'ai80': fuels['АИ-80'],
-            'dt_winter': fuels['ДТ (зимнее)'],
-            'kpg': fuels['КПГ'],
-            'dt_arctica': fuels['ДТ Арктика']
+            'ai92_taneko': fuels[price.FuelTypes.AI92_TANEKO],
+            'ai92': fuels[price.FuelTypes.AI92],
+            'ai95_taneko': fuels[price.FuelTypes.AI95_TANEKO],
+            'ai95': fuels[price.FuelTypes.AI95],
+            'dt': fuels[price.FuelTypes.DT],
+            'dt_taneko': fuels[price.FuelTypes.DT_TANEKO],
+            'ai98_taneko': fuels[price.FuelTypes.AI98_TANEKO],
+            'sug': fuels[price.FuelTypes.SUG],
+            'ai98': fuels[price.FuelTypes.AI98],
+            'electro': fuels[price.FuelTypes.ELECTRO],
+            'ai100': fuels[price.FuelTypes.AI100],
+            'ad_blue': fuels[price.FuelTypes.AD_BLUE],
+            'ai80': fuels[price.FuelTypes.AI80],
+            'dt_winter': fuels[price.FuelTypes.DT_WINTER],
+            'kpg': fuels[price.FuelTypes.KPG],
+            'dt_arctica': fuels[price.FuelTypes.DT_ARCTICA]
         }
     )
     if not created:
-        fuel.ai92_taneko = fuels['АИ-92 Танеко']
-        fuel.ai92 = fuels['АИ-92']
-        fuel.ai95_taneko = fuels['АИ-95 Танеко']
-        fuel.ai95 = fuels['АИ-95']
-        fuel.dt = fuels['ДТ']
-        fuel.dt_taneko = fuels['ДТ ТАНЕКО']
-        fuel.ai98_taneko = fuels['АИ-98 Танеко']
-        fuel.sug = fuels['СУГ']
-        fuel.ai98 = fuels['АИ-98']
-        fuel.electro = fuels['Электрозарядка']
-        fuel.ai100 = fuels['АИ-100']
-        fuel.ad_blue = fuels['AdBlue']
-        fuel.ai80 = fuels['АИ-80']
-        fuel.dt_winter = fuels['ДТ (зимнее)']
-        fuel.kpg = fuels['КПГ']
-        fuel.dt_arctica = fuels['ДТ Арктика']
+        fuel.ai92_taneko = fuels[price.FuelTypes.AI92_TANEKO]
+        fuel.ai92 = fuels[price.FuelTypes.AI92]
+        fuel.ai95_taneko = fuels[price.FuelTypes.AI95_TANEKO]
+        fuel.ai95 = fuels[price.FuelTypes.AI95]
+        fuel.dt = fuels[price.FuelTypes.DT]
+        fuel.dt_taneko = fuels[price.FuelTypes.DT_TANEKO]
+        fuel.ai98_taneko = fuels[price.FuelTypes.AI98_TANEKO]
+        fuel.sug = fuels[price.FuelTypes.SUG]
+        fuel.ai98 = fuels[price.FuelTypes.AI98]
+        fuel.electro = fuels[price.FuelTypes.ELECTRO]
+        fuel.ai100 = fuels[price.FuelTypes.AI100]
+        fuel.ad_blue = fuels[price.FuelTypes.AD_BLUE]
+        fuel.ai80 = fuels[price.FuelTypes.AI80]
+        fuel.dt_winter = fuels[price.FuelTypes.DT_WINTER]
+        fuel.kpg = fuels[price.FuelTypes.KPG]
+        fuel.dt_arctica = fuels[price.FuelTypes.DT_ARCTICA]
         fuel.save()
