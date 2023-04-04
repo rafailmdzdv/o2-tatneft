@@ -1,0 +1,25 @@
+.layout {
+  font: normal bold 15px sans-serif;
+  text-align: right;
+}
+
+nav.auth {
+    margin: 0;
+    padding: 0;
+    line-height: 2em;
+}
+
+nav.auth ul {
+    background: #00b473;
+    height: 2em;
+}
+
+nav.auth li {
+    display: inline;
+    padding: 5px;
+}
+
+nav.auth a {
+    text-decoration: none;
+    color: #fff
+}
