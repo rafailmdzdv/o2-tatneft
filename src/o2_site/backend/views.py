@@ -1,33 +1,20 @@
-import json
-
-from django.contrib.auth import authenticate
 from django.http.request import HttpRequest
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.tokens import RefreshToken
 
-from backend import error_messages, forms, models
+from backend.services import (credentials,
+                              logout,
+                              signin,
+                              signup)
 
 
-class LoginView(APIView):
+class SigninView(APIView):
 
     def post(self, request: Request) -> Response:
-        username = request.data.get('username')
-        password = request.data.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            refresh_token = RefreshToken.for_user(user)
-            data = {
-                'success': True,
-                'access_token': str(refresh_token.access_token),
-                'refresh_token': str(refresh_token)
-            }
-            return Response(data)
-        return Response({'success': False,
-                         'error': 'Логин или пароль неверный'})
+        return signin.signin_user(request.data)
 
 
 class LogoutView(APIView):
@@ -35,9 +22,7 @@ class LogoutView(APIView):
     authentication_classes = [JWTAuthentication]
 
     def post(self, request: Request) -> Response:
-        refresh_token = RefreshToken(request.data['refresh_token'])
-        refresh_token.blacklist()
-        return Response({'success': True})
+        return logout.logout_and_remove_token(request.data)
 
 
 class ChangeUsernameView(APIView):
@@ -45,17 +30,7 @@ class ChangeUsernameView(APIView):
     authentication_classes = [JWTAuthentication]
 
     def post(self, request: Request) -> Response:
-        form = forms.UpdateCredentialsForm(data=json.loads(request.body),
-                                           instance=request.user)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = form.cleaned_data['username']
-            user.save()
-            return Response({'success': True})
-        else:
-            error = list(form.errors.values())[0][0]
-            return Response({'success': False,
-                             'error': error})
+        return credentials.change_user_credential(request, 'username')
 
 
 class ChangeEmailView(APIView):
@@ -63,24 +38,10 @@ class ChangeEmailView(APIView):
     authentication_classes = [JWTAuthentication]
 
     def post(self, request: Request) -> Response:
-        form = forms.UpdateCredentialsForm(data=json.loads(request.body),
-                                           instance=request.user)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.email = form.cleaned_data['email']
-            user.save()
-            return Response({'success': True})
-        else:
-            error = list(form.errors.values())[0][0]
-            return Response({'success': False,
-                             'error': error})
+        return credentials.change_user_credential(request, 'email')
 
 
 @csrf_exempt
-def register_user(request: HttpRequest) -> Response | None:
+def signup_user(request: HttpRequest) -> Response | None:
     if request.method == 'POST':
-        form = forms.RegistrationForm(data=json.loads(request.body))
-        if form.is_valid():
-            form.save()
-            return Response({"status": "success"})
-        return Response({"status": "failed", "error": form.errors})
+        return signup.signup_user(request)

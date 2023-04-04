@@ -12,6 +12,6 @@ urlpatterns = [
     path('api/changeUsername/', views.ChangeUsernameView.as_view()),
     path('api/changeEmail/', views.ChangeEmailView.as_view()),
     path('api/logout/', views.LogoutView.as_view()),
-    path('api/auth/', views.LoginView.as_view()),
-    path('signup/', views.register_user)
+    path('api/auth/', views.SigninView.as_view()),
+    path('signup/', views.signup_user)
 ]

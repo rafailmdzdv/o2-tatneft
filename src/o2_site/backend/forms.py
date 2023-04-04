@@ -52,4 +52,11 @@ class UpdateCredentialsForm(forms.ModelForm):
         cleaned_data = super().clean()
         if not any(cleaned_data.values()):
             raise forms.ValidationError('Данное поле необходимо')
+        else:
+            filtered_by_empty = filter(
+                lambda field: self.cleaned_data[field] == '',
+                cleaned_data.keys()
+            )
+            empty_field = list(filtered_by_empty)[0]
+            del cleaned_data[empty_field]
         return cleaned_data
