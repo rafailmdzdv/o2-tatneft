@@ -1,27 +1,11 @@
 import { createStore } from "solid-js/store";
 
-import styles from "../styles/ProfilePage.module.css";
-
-const ProfileLayout = ({ children }) => {
-  if (!localStorage.length) {
-    window.location.href = "/";
-    return null;
-  };
-  return (
-    <div id="profile" class={styles.profile}>
-      <div id="profile-panel" class={styles.profilePanel}>
-        <a href="/profile/changeUsername">Изменить логин</a>
-        <a href="/profile/changeEmail">Изменить почту</a>
-        <a href="/profile/changePassword">Изменить пароль</a>
-      </div>
-      { children }
-    </div>
-  );
-};
+import { ProfileLayout } from "./ProfilePage";
+import styles from "../../styles/ProfilePage.module.css";
 
 const ProfileUsername = () => {
   const [state, setState] = createStore({
-    newUsername: ""
+    username: ""
   });
 
   const handleInput = (event) => {
@@ -41,21 +25,36 @@ const ProfileUsername = () => {
       body: JSON.stringify(state)
     })
       .then(response => response.json())
-      .then(_ => setState("message", "Имя успешно изменено!"));
+      .then(data => {
+        let message, statusColor;
+        if (data.success) {
+          message = "Логин успешно изменён!";
+          statusColor = "#00b473";
+        } else {
+          message = data.error;
+          statusColor = "#ee3a43";
+        };
+        setState({
+          message: message,
+          statusColor: statusColor
+        });
+      });
   };
   return (
     <ProfileLayout>
       <div id="change-username-form" class={styles.changeForm}>
         <form onSubmit={handleSubmit}>
-          <div id="new-username-field" class={styles.newUsernameInput}>
+          <div id="new-username-field" class={styles.newDataInput}>
             <label>Новое имя пользователя</label>
-            <input type="text" id="newUsername" value={state.newUsername} onInput={handleInput}></input>
+            <input type="text" id="username" value={state.username} onInput={handleInput}></input>
           </div>
           <div id="submit-button" class={styles.submitButton}>
             <button type="submit">Подтвердить</button>
           </div>
           <div id="status-message" class={styles.statusMessage}>
-            <span>{state.message}</span>
+            <span style={{ color: state.statusColor }}>
+              {state.message}
+            </span>
           </div>
         </form>
       </div>
@@ -63,10 +62,4 @@ const ProfileUsername = () => {
   );
 };
 
-const ProfilePage = () => {
-  return (
-    <ProfileLayout />
-  );
-};
-
-export { ProfileUsername, ProfilePage };
+export default ProfileUsername;

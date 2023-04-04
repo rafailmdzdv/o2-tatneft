@@ -1,16 +1,15 @@
 import json
 
 from django.contrib.auth import authenticate
-from django.http.response import JsonResponse
 from django.http.request import HttpRequest
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.tokens import BlacklistedToken, RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken
 
-from backend import forms
+from backend import error_messages, forms, models
 
 
 class LoginView(APIView):
@@ -46,18 +45,42 @@ class ChangeUsernameView(APIView):
     authentication_classes = [JWTAuthentication]
 
     def post(self, request: Request) -> Response:
-        user = request.user
-        new_username = request.data['newUsername']
-        user.username = new_username
-        user.save()
-        return Response({'success': True})
+        form = forms.UpdateCredentialsForm(data=json.loads(request.body),
+                                           instance=request.user)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = form.cleaned_data['username']
+            user.save()
+            return Response({'success': True})
+        else:
+            error = list(form.errors.values())[0][0]
+            return Response({'success': False,
+                             'error': error})
+
+
+class ChangeEmailView(APIView):
+
+    authentication_classes = [JWTAuthentication]
+
+    def post(self, request: Request) -> Response:
+        form = forms.UpdateCredentialsForm(data=json.loads(request.body),
+                                           instance=request.user)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.email = form.cleaned_data['email']
+            user.save()
+            return Response({'success': True})
+        else:
+            error = list(form.errors.values())[0][0]
+            return Response({'success': False,
+                             'error': error})
 
 
 @csrf_exempt
-def register_user(request: HttpRequest):
+def register_user(request: HttpRequest) -> Response | None:
     if request.method == 'POST':
         form = forms.RegistrationForm(data=json.loads(request.body))
         if form.is_valid():
             form.save()
-            return JsonResponse({"status": "success"})
-        return JsonResponse({"status": "failed", "error": form.errors})
+            return Response({"status": "success"})
+        return Response({"status": "failed", "error": form.errors})
