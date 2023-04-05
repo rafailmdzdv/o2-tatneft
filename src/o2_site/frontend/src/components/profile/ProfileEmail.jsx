@@ -1,5 +1,6 @@
 import { createStore } from "solid-js/store";
 
+import { backendHost } from "../../settings";
 import { ProfileLayout } from "./ProfilePage";
 import styles from "../../styles/ProfilePage.module.css";
 
@@ -16,7 +17,7 @@ const ProfileEmail = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://127.0.0.1:8001/api/changeEmail/", {
+    fetch(`${backendHost}/api/changeEmail/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

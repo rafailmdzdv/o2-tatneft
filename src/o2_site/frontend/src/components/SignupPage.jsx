@@ -1,5 +1,7 @@
 import { createStore } from "solid-js/store";
-import styles from '../styles/SignupPage.module.css';
+
+import { backendHost } from "../settings";
+import styles from "../styles/SignupPage.module.css";
 
 const SignupPage = () => {
 
@@ -18,7 +20,7 @@ const SignupPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://127.0.0.1:8001/signup/", {
+    fetch(`${backendHost}/signup/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

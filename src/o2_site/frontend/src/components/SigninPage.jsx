@@ -1,5 +1,7 @@
 import { createStore } from "solid-js/store";
-import styles from '../styles/SigninPage.module.css';
+
+import { backendHost } from "../settings";
+import styles from "../styles/SigninPage.module.css";
 
 const SigninPage = () => {
   const [state, setState] = createStore({
@@ -16,7 +18,7 @@ const SigninPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://127.0.0.1:8001/api/auth/", {
+    fetch(`${backendHost}/api/auth/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -32,6 +34,7 @@ const SigninPage = () => {
           for (const [token, tokenValue] of Object.entries(data).slice(1)) {
             localStorage.setItem(token, tokenValue);
           };
+          setTimeout(() => localStorage.clear(), 1800 * 1000);
           window.location.href = "/";
         };
       });
