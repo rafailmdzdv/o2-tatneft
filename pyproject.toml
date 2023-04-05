@@ -24,6 +24,7 @@ progressbar2 = "^4.2.0"
 django-cors-headers = "^3.14.0"
 bcrypt = "^4.0.1"
 djangorestframework-simplejwt = "^5.2.2"
+celery = "^5.2.7"
 
 
 [tool.poetry.group.dev.dependencies]

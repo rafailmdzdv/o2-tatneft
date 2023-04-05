@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 from project_config.envs import env
@@ -20,6 +21,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ]
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30)
 }
 
 INSTALLED_APPS = [
@@ -116,3 +121,13 @@ XLS_FILENAME = 'rss_gs.xls'
 XLS_FILEPATH = f'{BASE_DIR}/{XLS_FILENAME}'
 
 NCH_COORDINATES = (55.741215, 52.404099)
+
+FRONTEND_HOST = 'http://localhost:3000'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env.EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = env.EMAIL_HOST_PASSWORD
