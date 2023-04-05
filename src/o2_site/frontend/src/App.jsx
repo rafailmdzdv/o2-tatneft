@@ -5,7 +5,7 @@ import { logout } from "./utils/logout"
 import Map from "./components/Map";
 import ProfileEmail from "./components/profile/ProfileEmail";
 import ProfilePage from "./components/profile/ProfilePage";
-import ProfilePassword from "./components/profile/ProfilePassword";
+import ProfilePassword, { ProfilePasswordConfirm } from "./components/profile/ProfilePassword";
 import ProfileUsername from "./components/profile/ProfileUsername";
 import SigninPage from "./components/SigninPage";
 import SignupPage from "./components/SignupPage";
@@ -30,6 +30,7 @@ function App() {
           <Route path="/profile/changeUsername" component={ProfileUsername} />
           <Route path="/profile/changeEmail" component={ProfileEmail} />
           <Route path="/profile/changePassword" component={ProfilePassword} />
+          <Route path="/changePasswordConfirm" component={ProfilePasswordConfirm} />
         </Routes>
       </Router>
     </>

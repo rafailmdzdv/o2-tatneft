@@ -60,3 +60,19 @@ class UpdateCredentialsForm(forms.ModelForm):
             empty_field = list(filtered_by_empty)[0]
             del cleaned_data[empty_field]
         return cleaned_data
+
+
+class PasswordChangeForm(forms.Form):
+
+    password = forms.CharField(error_messages=error_messages.PASSWORD_MESSAGES)
+
+    def __init__(self, user: models.User, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        password = self.cleaned_data['password']
+        if commit:
+            self.user.set_password(password)
+            self.user.save()
+        return self.user

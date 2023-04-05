@@ -40,16 +40,16 @@
     border-color: #ee3a43;
     background-color: #00b473 ;
     margin-top: 4%;
-    font-size: 2vw;
+    font: normal bold 2vw sans-serif;
     width: 19vw;
 }
 
 .newDataInput {
     display: flex;
-    font-size: 1.5vw;
     justify-content: right;
     text-align: center;
     width: 100%;
+    font: normal bold 1.5vw sans-serif;
     margin: auto auto;
 }
 
@@ -62,6 +62,11 @@
 
 .statusMessage {
     text-align: right;
-    font-size: 1.5vw;
+    font: normal bold 1.5vw sans-serif;
     margin-top: 5%;
+}
+
+.changingStatus {
+    font: normal bold 1.5vw sans-serif;
+    margin: auto auto;
 }

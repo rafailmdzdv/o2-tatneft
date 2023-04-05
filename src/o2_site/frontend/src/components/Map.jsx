@@ -1,9 +1,11 @@
-import { createEffect } from 'solid-js';
-import styles from '../styles/Map.module.css'
+import { createEffect } from "solid-js";
+
+import { backendHost } from "../settings";
+import styles from "../styles/Map.module.css";
 
 const Map = () => {
   createEffect(() => {
-    fetch('http://127.0.0.1:8001/api/getMap/')
+    fetch(`${backendHost}/api/getMap/`)
       .then(response => response.json())
       .then(data => {
         const mapDivElement = document.getElementById("map-content");

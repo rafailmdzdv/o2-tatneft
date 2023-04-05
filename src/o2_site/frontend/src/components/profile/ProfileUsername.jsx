@@ -1,5 +1,6 @@
 import { createStore } from "solid-js/store";
 
+import { backendHost } from "../../settings";
 import { ProfileLayout } from "./ProfilePage";
 import styles from "../../styles/ProfilePage.module.css";
 
@@ -16,7 +17,7 @@ const ProfileUsername = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://127.0.0.1:8001/api/changeUsername/", {
+    fetch(`${backendHost}/api/changeUsername/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +46,7 @@ const ProfileUsername = () => {
       <div id="change-username-form" class={styles.changeForm}>
         <form onSubmit={handleSubmit}>
           <div id="new-username-field" class={styles.newDataInput}>
-            <label>Новое имя пользователя</label>
+            <label>Новый логин</label>
             <input type="text" id="username" value={state.username} onInput={handleInput}></input>
           </div>
           <div id="submit-button" class={styles.submitButton}>
