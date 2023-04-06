@@ -18,7 +18,7 @@ def start_adding_limit_and_update_data(card_number: str) -> None:
 
 def _start_adding_limit(card_number: str) -> None:
     with sync_playwright() as sp:
-        browser = sp.chromium.launch(headless=False)
+        browser = sp.chromium.launch(headless=True)
         lk_page = _authorize_to_lk(browser)
         card_page = _find_card_in_cards_page(lk_page, card_number)
         _add_limit(card_page)

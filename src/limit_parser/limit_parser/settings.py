@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from django.urls.conf import include
-
 from project_config.envs import env
 
 

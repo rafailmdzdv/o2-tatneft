@@ -35,10 +35,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" component={Home} />
-          <Route 
-            path="/signin"
-            element={<SigninPage onAuth={() => setAuthenticatedStatus(true)}/>}
-          />
+          <Route path="/signin" component={SigninPage} />
           <Route path="/signup" component={SignupPage} />
           <Route path="/logout" element={logout()} />
           <Route path="/profile" component={ProfilePage} />
