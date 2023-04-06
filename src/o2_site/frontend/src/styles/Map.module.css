@@ -1,5 +1,6 @@
 .mapClass {
-    border: 10px solid #ee3a43;
+    border: 10px solid #24968f;
+    border-radius: 10px;
     position: fixed;
     margin: auto;
     left: 0;

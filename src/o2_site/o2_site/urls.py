@@ -15,5 +15,6 @@ urlpatterns = [
     path('changePasswordConfirm/', views.ChangePasswordConfirmView.as_view()),
     path('api/logout/', views.LogoutView.as_view()),
     path('api/auth/', views.SigninView.as_view()),
+    path('api/getAzsXls/', views.AzsListView.as_view()),
     path('signup/', views.signup_user)
 ]

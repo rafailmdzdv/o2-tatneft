@@ -1,11 +1,14 @@
 import styles from '../styles/App.module.css'
 
 function Layout() {
-  if (localStorage.getItem("refresh_token")) {
+  const isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'));
+  const mapLink = <li><a href="/">Карта</a></li>;
+  if (isAuthenticated) {
     return (
       <div class={styles.layout}>
         <nav class={styles.auth}>
           <ul>
+            {mapLink}
             <li>
               <a href='/profile'>Профиль</a>
             </li>
@@ -21,6 +24,7 @@ function Layout() {
       <div class={styles.layout}>
         <nav class={styles.auth}>
           <ul>
+            {mapLink}
             <li>
               <a href="/signin">Авторизоваться</a>
             </li>

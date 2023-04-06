@@ -1,7 +1,7 @@
 import { createStore } from "solid-js/store";
 
 import { backendHost } from "../../settings";
-import { ProfileLayout } from "./ProfilePage";
+import ProfileLayout from "./ProfileLayout";
 import styles from "../../styles/ProfilePage.module.css";
 
 const ProfileUsername = () => {
@@ -16,12 +16,13 @@ const ProfileUsername = () => {
   };
 
   const handleSubmit = (event) => {
+    const tokens = JSON.parse(localStorage.getItem('tokens'));
     event.preventDefault();
     fetch(`${backendHost}/api/changeUsername/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+        "Authorization": `Bearer ${tokens.access_token}`
       },
       body: JSON.stringify(state)
     })

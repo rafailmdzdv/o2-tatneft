@@ -3,7 +3,7 @@ import { createStore } from "solid-js/store";
 import { backendHost } from "../settings";
 import styles from "../styles/SigninPage.module.css";
 
-const SigninPage = () => {
+const SigninPage = (prop) => {
   const [state, setState] = createStore({
     username: "",
     password: ""
@@ -31,10 +31,12 @@ const SigninPage = () => {
           setState("message", data.error);
         } else {
           setState("message", "Успешно!");
+          const tokens = { access_token: "", refresh_token: "" };
           for (const [token, tokenValue] of Object.entries(data).slice(1)) {
-            localStorage.setItem(token, tokenValue);
+            tokens[token] = tokenValue;
           };
-          setTimeout(() => localStorage.clear(), 1800 * 1000);
+          localStorage.setItem('tokens', JSON.stringify(tokens));
+          localStorage.setItem("isAuthenticated", true);
           window.location.href = "/";
         };
       });

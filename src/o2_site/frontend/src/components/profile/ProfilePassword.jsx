@@ -3,7 +3,7 @@ import { createStore } from "solid-js/store";
 import { useSearchParams } from "@solidjs/router";
 
 import { backendHost } from "../../settings";
-import { ProfileLayout } from "./ProfilePage";
+import ProfileLayout from "./ProfileLayout";
 import styles from "../../styles/ProfilePage.module.css";
 
 const ProfilePassword = () => {
@@ -18,12 +18,13 @@ const ProfilePassword = () => {
   };
 
   const handleSubmit = (event) => {
+    const tokens = JSON.parse(localStorage.getItem('tokens'));
     event.preventDefault();
     fetch(`${backendHost}/api/changePassword/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+        "Authorization": `Bearer ${tokens.access_token}`
       },
       body: JSON.stringify(state)
     })
@@ -68,12 +69,13 @@ const ProfilePasswordConfirm = () => {
   const [params, _] = useSearchParams();
   const [status, setStatus] = createSignal("");
 
+  const tokens = JSON.parse(localStorage.getItem('tokens'));
   const requiredData = { password: params.pass, token: params.token };
   fetch(`${backendHost}/changePasswordConfirm/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+      "Authorization": `Bearer ${tokens.access_token}`
     },
     body: JSON.stringify(requiredData)
   })

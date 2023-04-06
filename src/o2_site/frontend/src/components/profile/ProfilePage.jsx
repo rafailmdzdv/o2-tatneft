@@ -1,27 +1,25 @@
+import ProfileLayout from "./ProfileLayout";
+import onSubmitAZS from "../../utils/azsList";
 import styles from "../../styles/ProfilePage.module.css";
-
-const ProfileLayout = ({ children }) => {
-  if (!localStorage.length) {
-    window.location.href = "/";
-    return null;
-  };
-  return (
-    <div id="profile" class={styles.profile}>
-      <div id="profile-panel" class={styles.profilePanel}>
-        <a href="/profile/changeUsername">Изменить логин</a>
-        <a href="/profile/changeEmail">Изменить почту</a>
-        <a href="/profile/changePassword">Изменить пароль</a>
-      </div>
-      { children }
-    </div>
-  );
-};
 
 const ProfilePage = () => {
   return (
-    <ProfileLayout />
+    <ProfileLayout>
+      <div id="user-panel" class={styles.userPanel}>
+        <div id="buttons-block" class={styles.buttonsBlock}>
+          <div id="azs-list" class={styles.userButtons}>
+            <button type="button" onClick={onSubmitAZS}>Список АЗС</button>
+          </div>
+          <div id="first-program-report" class={styles.userButtons}>
+            <button type="button">Отчёт первой программы</button>
+          </div>
+          <div id="second-program-report" class={styles.userButtons}>
+            <button type="button">Отчёт второй программы</button>
+          </div>
+        </div>
+      </div>
+    </ProfileLayout>
   );
 };
 
 export default ProfilePage;
-export { ProfileLayout };
