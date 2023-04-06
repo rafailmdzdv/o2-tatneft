@@ -1,14 +1,13 @@
-import json
-
-from rest_framework import response, request
+from rest_framework.response import Response
+from rest_framework.request import Request
 
 from backend import forms
 
 
-def signup_user(request: request.Request) -> response.Response:
-    form = forms.RegistrationForm(data=json.loads(request.body))
+def signup_user(request: Request) -> Response:
+    form = forms.RegistrationForm(data=request.data)
     if form.is_valid():
         form.save()
-        return response.Response({"status": "success"})
-    error = list(form.errors.values())[0][0]
-    return response.Response({"status": "failed", "error": error})
+        return Response({"status": "success"})
+    error = list(form.errors.values())
+    return Response({"status": "failed", "error": error})
