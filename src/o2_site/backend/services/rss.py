@@ -17,6 +17,7 @@ from project_config.log import logger as log
 def start_monthly_parsing():
     schedule.every(30).days.do(_get_gs_data)
     log.debug('Monthly work started!')
+    _get_gs_data()
     while True:
         schedule.run_pending()
         time.sleep(1)

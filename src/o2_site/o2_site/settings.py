@@ -120,7 +120,7 @@ XLS_FILEPATH = f'{BASE_DIR}/{XLS_FILENAME}'
 
 NCH_COORDINATES = (55.741215, 52.404099)
 
-FRONTEND_HOST = 'http://localhost:3000'
+FRONTEND_HOST = 'http://localhost:4173'
 LIMIT_PARSER_HOST = 'http://localhost:8000'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
