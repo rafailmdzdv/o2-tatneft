@@ -1,8 +1,9 @@
 .signinForm {
     display: flex;
     font: normal bold 2vw sans-serif;
-    border: 5px solid #ee3a43;
-    background-color: #00b473;
+    border: 5px solid #24968f;
+    color: #1a1a1a;
+    background-color: #24968f;
     justify-content: center;
     align-items: center;
     margin: auto auto;
@@ -17,12 +18,14 @@
 
 .inputFields {
     height: auto;
-    margin-bottom: auto;
+    margin-bottom: 10%;
     text-align: center;
 }
 
 .inputFields input {
-    margin: auto auto;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5%;
     width: 20vw;
     height: 3vh;
     display: block;
@@ -31,16 +34,24 @@
 .submitButton{
     width: auto;
     text-align: center;
-    margin-top: 5%;
+    margin-top: 8%;
 }
 
 .submitButton button {
     font-size: 1.5vw;
-    border: 2px solid #ee3a43;
+    border: 5px solid #cccfce;
     border-radius: 10px;
+}
+
+.submitButton button:hover {
+    opacity: .8;
 }
 
 .statusCode {
     text-align: center;
     margin-top: 1vh;
+}
+
+.statusCode span {
+    color: #1a1a1a;
 }

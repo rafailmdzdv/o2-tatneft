@@ -1,3 +1,4 @@
+import { createEffect } from "solid-js";
 import { Router, Routes, Route } from "@solidjs/router";
 
 import Layout from "./components/Layout";
@@ -17,13 +18,27 @@ function Home() {
 };
 
 function App() {
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+
+  createEffect(() => {
+    if (isAuthenticated) {
+      setTimeout(() => {
+        localStorage.removeItem('tokens');
+        localStorage.setItem('isAuthenticated', false);
+      }, 1800 * 1000);
+    };
+  });
+
   return (
     <>
       <Layout />
       <Router>
         <Routes>
           <Route path="/" component={Home} />
-          <Route path="/signin" component={SigninPage} />
+          <Route 
+            path="/signin"
+            element={<SigninPage onAuth={() => setAuthenticatedStatus(true)}/>}
+          />
           <Route path="/signup" component={SignupPage} />
           <Route path="/logout" element={logout()} />
           <Route path="/profile" component={ProfilePage} />

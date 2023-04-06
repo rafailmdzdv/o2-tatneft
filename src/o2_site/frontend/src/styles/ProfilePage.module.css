@@ -6,26 +6,43 @@
 
 .profilePanel {
     display: inline-flex;
+    align-items: center;
     flex-flow: column;
-    height: 90vh;;
-    background: #00b473;
+    width: 10%;
+}
+
+.changeButtonsBlock {
+    text-align: center;
+    width: 100%;
+    margin-left: 30%;
+    padding: 10% 10%;
+    border: 10px solid #24968f;
+    border-radius: 50px;
+    background: #24968f;
+    margin-bottom: 10%;
+}
+
+.changeButtonsBlock:hover {
+    opacity: .4;
+}
+
+.innerChangeButtonsBlock {
+    border: 4px solid #cccfce;
+    background: #fff;
+    border-radius: 20px;
 }
 
 .profilePanel a {
     text-decoration: none;
-    font: normal bold 1.5vw sans-serif;
-    color: #000;
-    margin: 10% 10%;
+    font: normal bold 1.4vw sans-serif;
+    color: #27302d;
 }
 
 .changeForm {
-    align-self: baseline;
-    margin-left: 10%;
-    width: 40vw;
-}
-
-.changeForm form {
-    margin-top: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
 }
 
 .submitButton {
@@ -36,12 +53,20 @@
 
 .submitButton button {
     border-radius: 10px;
-    border: 1 solid;
-    border-color: #ee3a43;
-    background-color: #00b473 ;
+    border: none;
+    background-color: #24968f ;
     margin-top: 4%;
     font: normal bold 2vw sans-serif;
-    width: 19vw;
+    color: #27302d;
+    width: 14vw;
+}
+
+.submitButton button:hover {
+    opacity: .8;
+}
+
+.submitButton button:active {
+    opacity: .5;
 }
 
 .newDataInput {
@@ -50,17 +75,20 @@
     text-align: center;
     width: 100%;
     font: normal bold 1.5vw sans-serif;
+    color: #27302d;
     margin: auto auto;
 }
 
 .newDataInput input {
     align-self: center;
     width: 20vw;
-    height: 1.5vh;
-    margin-left: 2%;
+    height: 3vh;
+    font-size: 20px;
+    padding-left: 2%;
 }
 
 .statusMessage {
+    margin: auto auto;
     text-align: right;
     font: normal bold 1.5vw sans-serif;
     margin-top: 5%;
@@ -69,4 +97,39 @@
 .changingStatus {
     font: normal bold 1.5vw sans-serif;
     margin: auto auto;
+}
+
+.userPanel {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    width: 88%;
+}
+
+.buttonsBlock {
+    background: #24968f;
+    border: 10px solid #24968f;
+    border-radius: 15px;
+    text-align: center;
+    padding: 5% 5%;
+}
+
+.userButtons {
+    margin-bottom: 3%;
+}
+
+.buttonsBlock button {
+    font: normal bold 2vw sans-serif;
+    color: #27302d;
+    border: solid 3px #cccfce;
+    border-radius: 15px;
+}
+
+.buttonsBlock button:hover {
+    opacity: .8;
+}
+
+.buttonsBlock button:active {
+    background: #aaa;
 }

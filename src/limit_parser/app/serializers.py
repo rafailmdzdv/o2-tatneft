@@ -7,4 +7,4 @@ class FuelCardSerializer(ModelSerializer):
 
     class Meta:
         model = models.FuelCard
-        fields = ['id', 'number']
+        fields = ['id', 'number', 'took_time', 'changed_time']

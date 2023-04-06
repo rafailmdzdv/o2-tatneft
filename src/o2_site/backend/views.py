@@ -1,8 +1,10 @@
+import pathlib
 from urllib.parse import urljoin, urlencode
 
-from django.http.request import HttpRequest
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator
+from django.http.response import HttpResponse
+from django.http.request import HttpRequest
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.decorators.csrf import csrf_exempt
@@ -12,7 +14,8 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from backend import forms
-from backend.services import (credentials,
+from backend.services import (azs_list,
+                              credentials,
                               logout,
                               signin,
                               signup)
@@ -89,6 +92,20 @@ class ChangePasswordConfirmView(APIView):
         else:
             return Response({'success': False,
                              'message': 'Ссылка недействительна'})
+
+
+class AzsListView(APIView):
+
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request: Request) -> HttpResponse:
+        filepath = azs_list.get_azs_xls()
+        with open(filepath, 'rb') as excel_file:
+            response = HttpResponse(excel_file.read(),
+                                    content_type='application/vnd.ms-excel')
+            filename = pathlib.Path(filepath).name
+            response['Content-Dispotion'] = f'attachment; filename={filename}'
+            return response
 
 
 @csrf_exempt
