@@ -1,6 +1,6 @@
 from django.http.response import HttpResponse
-from django.http.request import HttpRequest
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.views import APIView
@@ -85,6 +85,6 @@ class LimitParserReportView(APIView):
 
 
 @csrf_exempt
-def signup_user(request: HttpRequest) -> Response | None:
-    if request.method == 'POST':
-        return signup.signup_user(request)
+@api_view(['POST'])
+def signup_user(request: Request) -> Response | None:
+    return signup.signup_user(request)

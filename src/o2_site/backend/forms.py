@@ -10,6 +10,20 @@ class RegistrationForm(forms.Form):
     email = forms.EmailField(error_messages=error_messages.EMAIL_MESSAGES)
     password = forms.CharField(error_messages=error_messages.PASSWORD_MESSAGES)
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if models.User.objects.filter(username=username):
+            raise forms.ValidationError('Логин уже зарегистрирован',
+                                        code='unique')
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if models.User.objects.filter(email=email):
+            raise forms.ValidationError('Почта уже зарегистрирована',
+                                        code='unique')
+        return email
+
     def save(self):
         user = models.User.objects.create_user(
             username=self.cleaned_data['username'],
