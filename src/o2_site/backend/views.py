@@ -14,9 +14,9 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from backend import forms
-from backend.services import (azs_list,
-                              credentials,
+from backend.services import (credentials,
                               logout,
+                              responses,
                               signin,
                               signup)
 from o2_site.settings import FRONTEND_HOST
@@ -98,14 +98,24 @@ class AzsListView(APIView):
 
     authentication_classes = [JWTAuthentication]
 
-    def get(self, request: Request) -> HttpResponse:
-        filepath = azs_list.get_azs_xls()
-        with open(filepath, 'rb') as excel_file:
-            response = HttpResponse(excel_file.read(),
-                                    content_type='application/vnd.ms-excel')
-            filename = pathlib.Path(filepath).name
-            response['Content-Dispotion'] = f'attachment; filename={filename}'
-            return response
+    def get(self, _: Request) -> HttpResponse:
+        return responses.get_azs_file_response()
+
+
+class NumberSenderReportView(APIView):
+
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, _: Request) -> HttpResponse:
+        return responses.get_ns_file_report_response()
+
+
+class LimitParserReportView(APIView):
+
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, _: Request) -> HttpResponse:
+        return responses.get_lp_file_report_response()
 
 
 @csrf_exempt
