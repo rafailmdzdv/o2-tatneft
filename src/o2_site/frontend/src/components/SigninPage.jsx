@@ -3,7 +3,7 @@ import { createStore } from "solid-js/store";
 import { backendHost } from "../settings";
 import styles from "../styles/SigninPage.module.css";
 
-const SigninPage = (prop) => {
+const SigninPage = () => {
   const [state, setState] = createStore({
     username: "",
     password: ""

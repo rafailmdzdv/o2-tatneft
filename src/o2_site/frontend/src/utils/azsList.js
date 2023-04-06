@@ -1,6 +1,7 @@
 import { backendHost } from "../settings";
+import downloadFile from "./fileDownloader";
 
-const onSubmitAZS = (event) => {
+const onClickAzs = (event) => {
   event.preventDefault();
   getXls();
 };
@@ -8,14 +9,7 @@ const onSubmitAZS = (event) => {
 const getXls = () => {
   fetch(`${backendHost}/api/getAzsXls/`)
     .then(response => response.blob())
-    .then(blob => {
-      const blobObj = new Blob([blob])
-      const url = URL.createObjectURL(blobObj);
-      const elementLink = document.createElement('a');
-      elementLink.href = url;
-      elementLink.setAttribute('download', 'azsList.xlsx');
-      elementLink.click();
-    });
+    .then(blob => downloadFile(blob, "azsList.xlsx"));
 };
 
-export default onSubmitAZS;
+export default onClickAzs;

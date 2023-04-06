@@ -1,7 +1,7 @@
 import styles from "../../styles/ProfilePage.module.css";
 
 const ProfileLayout = ({ children }) => {
-  if (!localStorage.length) {
+  if (!JSON.parse(localStorage.getItem('isAuthenticated'))) {
     window.location.href = "/";
     return null;
   };

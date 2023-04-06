@@ -114,4 +114,5 @@ def _input_max_value(limit_form: ElementHandle) -> None:
 def _update_card_data(card: models.FuelCard):
     card.has_limit = True
     card.changed_time = datetime.now()
+    card.limit = 600
     card.save()
