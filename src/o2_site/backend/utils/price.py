@@ -11,7 +11,7 @@ class FuelTypes(enum.StrEnum):
     AI95_TANEKO = 'АИ-95 Танеко'
     AI95 = 'АИ-95'
     DT = 'ДТ'
-    DT_TANEKO = 'ДТ Танеко'
+    DT_TANEKO = 'ДТ ТАНЕКО'
     AI98_TANEKO = 'АИ-98 Танеко'
     SUG = 'СУГ'
     AI98 = 'АИ-98'
