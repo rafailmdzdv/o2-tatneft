@@ -8,3 +8,4 @@ class FuelCard(models.Model):
     has_limit = models.BooleanField()
     took_time = models.DateTimeField(blank=True, null=True)
     changed_time = models.DateTimeField(blank=True, null=True)
+    limit = models.IntegerField(blank=True, null=True)
